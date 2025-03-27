@@ -58,8 +58,8 @@ json
     "idTrabajador":102,
     "idInstalacion":203, 
     "hora":"13:00"
-    
 }
+
 PUT
 4: Actualizar incidencia por su id - updateIncidencia
 http://localhost:8000/api/public/post/update/8
@@ -78,6 +78,7 @@ json
     "hora":"00:00",
     "descripcion":"CILINDRO ROTO"
 }
+
 DELETE
 5: Borrar incidencia por su id - deleteIncidencia
 http://localhost:8000/api/public/post/delete/8
@@ -127,6 +128,7 @@ json
     "email":"CILINDRO@ROTO.COM",
     "telefono":"666777788"
 }
+
 PUT
 4: Actualizar trabajador por su id - updateTrabajador
 http://localhost:8000/api/public/post/trabajador/update/104
@@ -148,6 +150,7 @@ json
     "email":"CILINDRO@ROTO.COM",
     "telefono":"000000000"
 }
+
 DELETE
 5: Borrar trabajador por su id - deleteTrabajador
 http://localhost:8000/api/public/post/trabajador/delete/104
