@@ -134,7 +134,7 @@ class TrabajadorController extends Controller
                     "status" => "error",
                     "code" => 406,
                     "time" => now()->toIso8601String(),
-                    "message" => "Trabajador no encontrada",
+                    "message" => "Trabajador no encontrado",
                     "data" => "id = ".$id
                 ], 406);
             }
@@ -160,7 +160,7 @@ class TrabajadorController extends Controller
         }
     }
 
-//// FUNCION QUE BORRA UNA INCIDENCIA ////
+//// FUNCION QUE BORRA UN TRABAJADOR / NOSERA POSIBLE SI TIENE INCIDENCIAS REGISTRADAS ////
     public function deleteTrabajador($id){
         
         try{
@@ -172,7 +172,7 @@ class TrabajadorController extends Controller
                     "status" => "error",
                     "code" => 406,
                     "time" => now()->toIso8601String(),
-                    "message" => "Incidencia no encontrada",
+                    "message" => "Trabajador no encontrado",
                     "data" => "id = ".$id
                 ], 406);
             }
@@ -183,7 +183,7 @@ class TrabajadorController extends Controller
                 "status" => "success",
                 "code" => 204,
                 "time" => now()->toIso8601String(),
-                "message" => "Incidencia eliminada = ".$id
+                "message" => "Trabajador eliminado = ".$id
             ], 200);
 
         }catch(\Exception $e){

@@ -28,4 +28,4 @@ Route::post('/public/post/trabajador/create',[TrabajadorController::class, 'crea
 // Por las reglas de la base de datos al actualizar datos de un trabajador los datos que consten en otras tablas tambien se actualizan
 Route::put('/public/post/trabajador/update/{id}', [TrabajadorController::class, 'updateTrabajador']);
 // Por las reglas de la base de datos, los trabajadores son dependientes de sus incidencias por lo que no se pueden eliminar
-// Route::delete('/public/post/trabajador/delete/{id}', [TrabajadorController::class, 'deleteTrabajador']);
+Route::delete('/public/post/trabajador/delete/{id}', [TrabajadorController::class, 'deleteTrabajador']);
