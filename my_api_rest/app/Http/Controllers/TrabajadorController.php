@@ -79,7 +79,7 @@ class TrabajadorController extends Controller
         try {
             // Validado de los datos recibidos
             $dataVal = $data->validate([
-                'idTrabajador' => 'required',
+                'idTrabajador' => 'required|integer',
                 'nombreTrabajador' => 'required',
                 'apellido1' => 'required',
                 'apellido2' => 'required',
