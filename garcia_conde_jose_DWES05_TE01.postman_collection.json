@@ -52,7 +52,7 @@
 						"public",
 						"post",
 						"get",
-						"{{id}}"
+						"04"
 					]
 				},
 				"description": "Esta solicitud GET obtendría una incidencia específica basado en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` en la URL al ID de la incidencia que quieres consultar y debería devolver los detalles de esta incidencia en concreto. Si no lo encuentra dara error 406."
@@ -122,7 +122,7 @@
 						"public",
 						"post",
 						"update",
-						"{{id}}"
+						"8"
 					]
 				},
 				"description": "Esta solicitud PUT actualiza una incidencia existente en el sistema basándose en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` al ID de la incidencia que quieres actualizar, editando 'idTrabajador', 'idInstalacion', 'hora' y 'descripcion' en el cuerpo de la solicitud con los valores nuevos que se han de modificar en el contenido de esta incidencia en concreto. En caso de que no encuentre la incidencia generaria un error 406."
@@ -146,10 +146,161 @@
 						"public",
 						"post",
 						"delete",
-						"{{id}}"
+						"8"
 					]
 				},
 				"description": "Esta solicitud DELETE borra una incidencia existente en el sistema basándose en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` al ID de la incidencia que quieres borrar, se borrará la incidencia en concreto y se recibirá el id de la incidencia borrada. En caso de que no encuentre la incidencia generaria un error 406."
+			},
+			"response": []
+		},
+		{
+			"name": "1: Recibir todos los Trabajadores - getAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "XDEBUG_SESSION",
+						"value": "1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/public/post/trabajador/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"public",
+						"post",
+						"trabajador",
+						"get"
+					]
+				},
+				"description": "Esta solicitud GET obtiene una lista de todos los trabajadores disponibles en el sistema.\n\n**Caso de uso:** Al pulsar enviar debería devolver la información de todos los trabajadores disponibles. En caso de error devolvera codigos 404 o 500"
+			},
+			"response": []
+		},
+		{
+			"name": "2: Recibir un trabajador por su id - getById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/public/post/trabajador/get/101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"public",
+						"post",
+						"trabajador",
+						"get",
+						"101"
+					]
+				},
+				"description": "Esta solicitud GET obtendría un trabajador específico basado en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` en la URL al ID del trabajador que quieres consultar (100-199) y debería devolver los detalles del trabajador en concreto. Si no lo encuentra dara error 406."
+			},
+			"response": []
+		},
+		{
+			"name": "3: Crear trabajador nuevo - createTrabajador",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idTrabajador\":104,\n    \"nombreTrabajador\":\"Pedro\",\n    \"apellido1\":\"Fernandez\",\n    \"apellido2\":\"Murillo\",\n    \"dni\":\"44444444R\",\n    \"direccion\":\"Calle cubo 3 4-A\",\n    \"email\":\"CILINDRO@ROTO.COM\",\n    \"telefono\":\"666777788\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/public/post/trabajador/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"public",
+						"post",
+						"trabajador",
+						"create"
+					]
+				},
+				"description": "Esta solicitud POST crearía un nuevo trabajador en el sistema.\n\n**Caso de uso:** En este caso, en el cuerpo de la solicitud se insertaria un JSON con los campos, \"idTrabajador\", \"nombreTrabajador\", \"apellido1\", \"apellido2\", \"dni\", \"direccion\", \"telefono\", \"email\", que contendrían los datos necesarios para crear un nuevo trabajador que se quiera crear. Se recibira los datos del trabajador creado. Si no se consigue crear generaria el error 500."
+			},
+			"response": []
+		},
+		{
+			"name": "4: Actualizar trabajador por su id - updateTrabajador",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombreTrabajador\":\"PEDRO\",\n    \"apellido1\":\"Fernandez\",\n    \"apellido2\":\"Murillo\",\n    \"dni\":\"44444444R\",\n    \"direccion\":\"Calle cubo 3 4-A\",\n    \"email\":\"CILINDRO@ROTO.COM\",\n    \"telefono\":\"000000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/public/post/trabajador/update/104",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"public",
+						"post",
+						"trabajador",
+						"update",
+						"104"
+					]
+				},
+				"description": "Esta solicitud PUT actualiza un trabajador existente en el sistema basándose en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` al ID del trabajador que quieres actualizar, editando los datos del body abajo mostrado con los valores nuevos que se han de modificar en el contenido del trabajador en concreto. En caso de que no encuentre el trabajador generaria un error 406."
+			},
+			"response": []
+		},
+		{
+			"name": "5: Borrar trabajador por su id - deleteTrabajador",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/public/post/trabajador/delete/104",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"public",
+						"post",
+						"trabajador",
+						"delete",
+						"104"
+					]
+				},
+				"description": "Esta solicitud DELETE borra un trabajador existente en el sistema basándose en su ID.\n\n**Caso de uso:** Si se cambia el valor de `{{id}}` al ID del trabajador que quieres borrar, se borrará el trabajador en concreto y se recibirá el id del trabajador borrado. En caso de que no encuentre el trabajador generaria un error 406."
 			},
 			"response": []
 		}
