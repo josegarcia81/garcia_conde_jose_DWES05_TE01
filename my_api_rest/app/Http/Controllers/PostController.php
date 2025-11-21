@@ -34,34 +34,34 @@ class PostController extends Controller{
             //                         );
 
             $incidencias = [
-                            {
-                                "idIncidencia": 1,
-                                "idTrabajador": 101,
-                                "nombreTrabajador": "Juan Pérez",
-                                "idInstalacion": 201,
-                                "nombreInstalacion": "Oficina Central",
-                                "hora": "09:30",
-                                "descripcion": "Foco fundido en la sala de reuniones"
-                            },
-                            {
-                                "idIncidencia": 2,
-                                "idTrabajador": 102,
-                                "nombreTrabajador": "María López",
-                                "idInstalacion": 202,
-                                "nombreInstalacion": "Almacén",
-                                "hora": "14:15",
-                                "descripcion": "Avería en la puerta automática"
-                            },
-                            {
-                                "idIncidencia": 3,
-                                "idTrabajador": 103,
-                                "nombreTrabajador": "Carlos Gómez",
-                                "idInstalacion": 203,
-                                "nombreInstalacion": "Taller",
-                                "hora": "16:45",
-                                "descripcion": "Fuga de agua en el taller de mantenimiento"
-                            }
-                        ]
+                            [
+                                "idIncidencia" => 1,
+                                "idTrabajador" => 101,
+                                "nombreTrabajador" => "Juan Pérez",
+                                "idInstalacion" => 201,
+                                "nombreInstalacion" => "Oficina Central",
+                                "hora" => "09:30",
+                                "descripcion" => "Foco fundido en la sala de reuniones"
+                            ],
+                            [
+                                "idIncidencia" => 2,
+                                "idTrabajador" => 102,
+                                "nombreTrabajador" => "María López",
+                                "idInstalacion" => 202,
+                                "nombreInstalacion" => "Almacén",
+                                "hora" => "14:15",
+                                "descripcion" => "Avería en la puerta automática"
+                            ],
+                            [
+                                "idIncidencia" => 3,
+                                "idTrabajador" => 103,
+                                "nombreTrabajador" => "Carlos Gómez",
+                                "idInstalacion" => 203,
+                                "nombreInstalacion" => "Taller",
+                                "hora" => "16:45",
+                                "descripcion" => "Fuga de agua en el taller de mantenimiento"
+                            ]
+                        ];
             
             return response()->json([
                 "status" => "success",
