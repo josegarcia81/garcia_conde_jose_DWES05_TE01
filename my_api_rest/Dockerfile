@@ -9,26 +9,30 @@ RUN apt-get update && apt-get install -y \
 # Activar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# Copiar el proyecto al contenedor
-COPY . /var/www/html/
+# Establecer directorio de trabajo
+WORKDIR /var/www/html
 
-RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Copiar el proyecto Laravel (repo raíz /v2)
+COPY . .
 
-# Establecer permisos en storage y bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Crear directorios necesarios y asignar permisos
+RUN mkdir -p storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
 
-# Instalar Composer
+# Copiar Composer desde la imagen oficial
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Instalar dependencias de Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Generar key de Laravel (puede sobrescribirse con ENV)
+# Copiar .env.example a .env si no existe
+RUN cp .env.example .env
+
+# Generar APP_KEY
 RUN php artisan key:generate
 
-# Exponer puerto
+# Exponer puerto 80
 EXPOSE 80
 
-# Iniciar Apache en primer plano
+# Iniciar Apache
 CMD ["apache2-foreground"]
