@@ -8,7 +8,7 @@ use App\Http\Controllers\TrabajadorController;
 
 // Rutas para realizar consultas CRUD sobre la tabla incidencias
 
-Route::get('/public/post/get',[PostController::class, 'getAll']);
+Route::get('/post/get',[PostController::class, 'getAll']);
 
 Route::get('/public/post/get/{id}',[PostController::class, 'getById']);
 
