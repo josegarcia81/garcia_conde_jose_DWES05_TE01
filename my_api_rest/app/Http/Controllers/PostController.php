@@ -15,23 +15,53 @@ class PostController extends Controller{
     public function getAll(){
         // Uso Try para controlar errores
         try{
-            // Consulta directa sobre la base de datos
-            $data = DB::table('incidencias')
-                                ->join('trabajadores','incidencias.idTrabajador','trabajadores.idTrabajador')
-                                ->join('instalaciones','incidencias.idInstalacion','instalaciones.idInstalacion')
-                                ->orderBy('id','asc')
-                                ->get();
+            // // Consulta directa sobre la base de datos
+            // $data = DB::table('incidencias')
+            //                     ->join('trabajadores','incidencias.idTrabajador','trabajadores.idTrabajador')
+            //                     ->join('instalaciones','incidencias.idInstalacion','instalaciones.idInstalacion')
+            //                     ->orderBy('id','asc')
+            //                     ->get();
 
-            // Mapeo de la respuesta para poder enviar datos de las otras tablas como los nombres //
-            $incidencias = $data->map(fn($incidencia)=>new IncidenciasDTO(
-                                                            $incidencia->id,
-                                                            $incidencia->idTrabajador,
-                                                            $incidencia->nombreTrabajador,
-                                                            $incidencia->idInstalacion,
-                                                            $incidencia->nombreInstalacion,
-                                                            $incidencia->hora,
-                                                            $incidencia->descripcion)
-                                    );
+            // // Mapeo de la respuesta para poder enviar datos de las otras tablas como los nombres //
+            // $incidencias = $data->map(fn($incidencia)=>new IncidenciasDTO(
+            //                                                 $incidencia->id,
+            //                                                 $incidencia->idTrabajador,
+            //                                                 $incidencia->nombreTrabajador,
+            //                                                 $incidencia->idInstalacion,
+            //                                                 $incidencia->nombreInstalacion,
+            //                                                 $incidencia->hora,
+            //                                                 $incidencia->descripcion)
+            //                         );
+
+            $incidencias = [
+                            {
+                                "idIncidencia": 1,
+                                "idTrabajador": 101,
+                                "nombreTrabajador": "Juan Pérez",
+                                "idInstalacion": 201,
+                                "nombreInstalacion": "Oficina Central",
+                                "hora": "09:30",
+                                "descripcion": "Foco fundido en la sala de reuniones"
+                            },
+                            {
+                                "idIncidencia": 2,
+                                "idTrabajador": 102,
+                                "nombreTrabajador": "María López",
+                                "idInstalacion": 202,
+                                "nombreInstalacion": "Almacén",
+                                "hora": "14:15",
+                                "descripcion": "Avería en la puerta automática"
+                            },
+                            {
+                                "idIncidencia": 3,
+                                "idTrabajador": 103,
+                                "nombreTrabajador": "Carlos Gómez",
+                                "idInstalacion": 203,
+                                "nombreInstalacion": "Taller",
+                                "hora": "16:45",
+                                "descripcion": "Fuga de agua en el taller de mantenimiento"
+                            }
+                        ]
             
             return response()->json([
                 "status" => "success",
