@@ -6,23 +6,24 @@ RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip git \
     && docker-php-ext-install pdo_mysql zip
 
-# Activar mod_rewrite de Apache
+# Activar mod_rewrite
 RUN a2enmod rewrite
 
-# Establecer directorio de trabajo
-WORKDIR /var/www/html
+# Cambiar DocumentRoot a public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Copiar el proyecto Laravel (repo raíz /v2)
+# Copiar proyecto
+WORKDIR /var/www/html
 COPY . .
 
-# Crear directorios necesarios y asignar permisos
+# Crear directorios y permisos
 RUN mkdir -p storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
-# Copiar Composer desde la imagen oficial
+# Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Instalar dependencias de Laravel
 RUN composer install --no-dev --optimize-autoloader
 
 # Copiar .env.example a .env si no existe
@@ -31,8 +32,5 @@ RUN cp .env.example .env
 # Generar APP_KEY
 RUN php artisan key:generate
 
-# Exponer puerto 80
 EXPOSE 80
-
-# Iniciar Apache
 CMD ["apache2-foreground"]
